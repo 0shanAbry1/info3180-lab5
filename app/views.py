@@ -51,6 +51,7 @@ def login():
                 flash('Invalid username or password entered', 'danger')
     return render_template("login.html", form=form)
 
+
 # user_loader callback. This callback is used to reload the user object from
 # the user ID stored in the session
 @login_manager.user_loader
@@ -63,6 +64,15 @@ def load_user(id):
 def secure_page():
     """Render the website's secure page that only logged in users can access."""
     return render_template('secure.html')
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logged out', 'danger')
+    return redirect(url_for('home'))
+
 
 ###
 # The functions below should be applicable to all Flask apps.

@@ -19,7 +19,13 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="{{ url_for('login') }}">Login</a></li>
+            <li class="active">
+            {% if current_user.is_authenticated %}
+              <a href="{{ url_for('logout') }}">Login</a>
+            {% else %}
+              <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
