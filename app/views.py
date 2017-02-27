@@ -18,7 +18,7 @@ from models import UserProfile
 
 @app.route('/')
 def home():
-    """Render website's home page."""
+    """Render the website's home page."""
     return render_template('home.html')
 
 @app.route('/about/')
@@ -56,6 +56,13 @@ def login():
 @login_manager.user_loader
 def load_user(id):
     return UserProfile.query.get(int(id))
+    
+
+@app.route('/secure-page')
+@login_required
+def secure_page():
+    """Render the website's secure page that only logged in users can access."""
+    return render_template('secure.html')
 
 ###
 # The functions below should be applicable to all Flask apps.
